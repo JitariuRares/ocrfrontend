@@ -31,19 +31,21 @@ function ParkingSearchPage() {
   };
 
   return (
-    <div className="card">
-      <h2 className="text-xl font-bold mb-4">Caută Istoric de Parcare</h2>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={plateNumber}
-          onChange={(e) => setPlateNumber(e.target.value)}
-          placeholder="Număr plăcuță"
-          className="file-input"
-          required
-        />
-        <button type="submit" className="primary-btn">Caută</button>
-      </form>
+    <>
+      <div className="search-form">
+        <h2>🅿️ Caută Istoric de Parcare</h2>
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            value={plateNumber}
+            onChange={(e) => setPlateNumber(e.target.value)}
+            placeholder="Număr plăcuță"
+            className="search-input"
+            required
+          />
+          <button type="submit" className="search-btn">Caută</button>
+        </form>
+      </div>
 
       {error && <div className="alert alert-error mt-4">{error}</div>}
 
@@ -69,7 +71,7 @@ function ParkingSearchPage() {
           </table>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

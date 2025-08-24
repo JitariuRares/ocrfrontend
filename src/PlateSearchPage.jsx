@@ -1,4 +1,3 @@
-// src/PlateSearchPage.jsx
 import React, { useState } from 'react';
 
 function PlateSearchPage() {
@@ -88,19 +87,18 @@ function PlateSearchPage() {
   };
 
   return (
-    <div className="card">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Căutare după plăcuță</h2>
-
-      <div className="mb-4 flex items-center gap-2">
+    <>
+      <div className="search-form">
+        <h2>🔍 Căutare după plăcuță</h2>
         <input
           type="text"
           placeholder="Ex: SV15WDC sau fragment: SV"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
-          className="w-full max-w-xs border border-gray-300 rounded pl-4 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="search-input"
         />
-        <button onClick={handleSearch} disabled={loading} className="primary-btn">
+        <button onClick={handleSearch} disabled={loading} className="search-btn">
           {loading ? 'Se caută…' : 'Caută'}
         </button>
       </div>
@@ -140,10 +138,11 @@ function PlateSearchPage() {
                     <td>
                       <button
                         onClick={() => handleDownloadPdf(item.plateNumber)}
-                        className="text-blue-600 hover:underline"
+                        className="download-btn"
                       >
-                        Descarcă PDF
+                        ⬇️ 📄 PDF
                       </button>
+
                     </td>
                   )}
                 </tr>
@@ -156,7 +155,7 @@ function PlateSearchPage() {
       {!loading && !error && results.length === 0 && query.trim() !== '' && (
         <div className="text-gray-600">Nu s-au găsit rezultate.</div>
       )}
-    </div>
+    </>
   );
 }
 

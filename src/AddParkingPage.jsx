@@ -45,32 +45,34 @@ function AddParkingPage() {
   };
 
   return (
-    <div className="card">
-      <h2 className="text-xl font-bold mb-4">Adaugă Istoric de Parcare</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={plateNumber}
-          onChange={(e) => setPlateNumber(e.target.value)}
-          placeholder="Număr plăcuță"
-          className="file-input"
-          required
-        />
-        <input
-          type="datetime-local"
-          value={entryTime}
-          onChange={(e) => setEntryTime(e.target.value)}
-          className="file-input"
-          required
-        />
-        <input
-          type="datetime-local"
-          value={exitTime}
-          onChange={(e) => setExitTime(e.target.value)}
-          className="file-input"
-        />
-        <button type="submit" className="primary-btn">Salvează</button>
-      </form>
+    <>
+      <div className="search-form">
+        <h2>🅿️ Adaugă Istoric de Parcare</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={plateNumber}
+            onChange={(e) => setPlateNumber(e.target.value)}
+            placeholder="Număr plăcuță"
+            className="search-input"
+            required
+          />
+          <input
+            type="datetime-local"
+            value={entryTime}
+            onChange={(e) => setEntryTime(e.target.value)}
+            className="search-input"
+            required
+          />
+          <input
+            type="datetime-local"
+            value={exitTime}
+            onChange={(e) => setExitTime(e.target.value)}
+            className="search-input"
+          />
+          <button type="submit" className="search-btn">Salvează</button>
+        </form>
+      </div>
 
       {successData && (
         <div className="alert alert-success">
@@ -83,7 +85,7 @@ function AddParkingPage() {
           {error}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

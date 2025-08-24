@@ -1,4 +1,3 @@
-// src/InsuranceSearchPage.jsx
 import React, { useState } from 'react';
 
 function InsuranceSearchPage() {
@@ -35,29 +34,28 @@ function InsuranceSearchPage() {
   };
 
   return (
-    <div className="card">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Caută Asigurare după Număr Plăcuță</h2>
+    <>
+      <div className="search-form">
+        <h2>📄 Caută Asigurare după Număr Plăcuță</h2>
 
-      <div className="mb-4">
-        <label className="block font-medium mb-1">Număr plăcuță:</label>
         <input
           type="text"
           value={plateNumber}
           onChange={(e) => setPlateNumber(e.target.value)}
-          className="input input-bordered w-full"
+          className="search-input"
           placeholder="Ex: SV15WDC"
         />
-      </div>
 
-      <button onClick={handleSearch} className="primary-btn mb-4">Caută</button>
+        <button onClick={handleSearch} className="search-btn">Caută</button>
+      </div>
 
       {error && <div className="alert alert-error mb-4">{error}</div>}
 
       {insuranceList.length > 0 && (
-        <div className="bg-green-100 p-4 rounded shadow-md">
+        <div className="card bg-green-50 mt-4">
           <h3 className="font-semibold mb-2">Rezultate:</h3>
           {insuranceList.map((ins, idx) => (
-            <div key={idx} className="mb-2">
+            <div key={idx} className="mb-4">
               <p><strong>ID poliță:</strong> {ins.id}</p>
               <p><strong>Companie:</strong> {ins.company}</p>
               <p><strong>De la:</strong> {ins.validFrom}</p>
@@ -67,7 +65,7 @@ function InsuranceSearchPage() {
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

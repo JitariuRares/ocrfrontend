@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './cropImage';
+import './UploadPage.css';
 
 function UploadPage() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15,32 +16,11 @@ function UploadPage() {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        handleCropConfirm();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [previewUrl, croppedAreaPixels]);
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setCarData(null);
-    setSuccessMessage('');
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
-      setShowCropper(true);
-    }
-  };
-
   const onCropComplete = useCallback((_, croppedPixels) => {
     setCroppedAreaPixels(croppedPixels);
   }, []);
 
-  const handleCropConfirm = async () => {
+  const handleCropConfirm = useCallback(async () => {
     if (!previewUrl || !croppedAreaPixels) return;
 
     try {
@@ -51,6 +31,27 @@ function UploadPage() {
       setShowCropper(false);
     } catch (err) {
       setError('Eroare la crop!');
+    }
+  }, [previewUrl, croppedAreaPixels]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        handleCropConfirm();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleCropConfirm]);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setCarData(null);
+    setSuccessMessage('');
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+      setShowCropper(true);
     }
   };
 
@@ -123,56 +124,62 @@ function UploadPage() {
   };
 
   return (
-    <div className="card">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Upload Plăcuță Auto</h2>
+    <div className="upload-container">
+      <div className="upload-left">
+        <h2 className="upload-title">🔍 Previzualizare imagine</h2>
 
-      <input type="file" accept="image/*" onChange={handleFileChange} className="file-input" />
+        {showCropper && previewUrl && (
+          <div className="crop-container">
+            <Cropper
+              image={previewUrl}
+              crop={crop}
+              zoom={zoom}
+              aspect={4 / 1}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              onCropComplete={onCropComplete}
+            />
+            <p className="text-sm text-center text-gray-600 mt-2">Apasă ENTER pentru a confirma selecția</p>
+          </div>
+        )}
 
-      {showCropper && previewUrl && (
-        <div className="relative w-full h-80 bg-gray-100 mt-4">
-          <Cropper
-            image={previewUrl}
-            crop={crop}
-            zoom={zoom}
-            aspect={4 / 1}
-            onCropChange={setCrop}
-            onZoomChange={setZoom}
-            onCropComplete={onCropComplete}
-          />
-          <p className="text-sm text-center text-gray-600 mt-2">Apasă ENTER pentru a confirma selecția</p>
-        </div>
-      )}
+        {!showCropper && previewUrl && (
+          <img src={previewUrl} alt="Preview crop-uit" className="upload-preview" />
+        )}
 
-      {!showCropper && previewUrl && (
-        <img src={previewUrl} alt="Preview crop-uit" className="mt-4 max-w-full h-auto rounded-md shadow-md" />
-      )}
+        <label className="primary-btn cursor-pointer">
+          Alege imagine
+          <input type="file" accept="image/*" onChange={handleFileChange} hidden />
+        </label>
 
-      {!showCropper && previewUrl && (
-        <button onClick={handleUpload} className="primary-btn mt-4">Trimite imaginea</button>
-      )}
+        {!showCropper && previewUrl && (
+          <button onClick={handleUpload} className="primary-btn">Trimite imaginea</button>
+        )}
+      </div>
 
-      {carData && (
-        <div className="alert alert-success mt-4">
-          <p><strong>Plăcuță:</strong> {carData.plateNumber}</p>
-          <p><strong>Utilizator:</strong> {carData.user} {carData.role ? `(${carData.role})` : ''}</p>
+      <div className="upload-right">
+        <h2 className="upload-title">📋 Detalii Plăcuță</h2>
 
-          <hr className="my-2" />
+        {carData && (
+          <>
+            <p><strong>Plăcuță:</strong> {carData.plateNumber}</p>
 
-          <label className="block font-medium">Marca:</label>
-          <input type="text" name="brand" value={editData.brand} onChange={handleEditChange} className="input input-bordered w-full mt-1 mb-2" />
+            <label className="label">Marca:</label>
+            <input type="text" name="brand" value={editData.brand} onChange={handleEditChange} className="input" />
 
-          <label className="block font-medium">Model:</label>
-          <input type="text" name="model" value={editData.model} onChange={handleEditChange} className="input input-bordered w-full mt-1 mb-2" />
+            <label className="label">Model:</label>
+            <input type="text" name="model" value={editData.model} onChange={handleEditChange} className="input" />
 
-          <label className="block font-medium">Proprietar:</label>
-          <input type="text" name="owner" value={editData.owner} onChange={handleEditChange} className="input input-bordered w-full mt-1 mb-2" />
+            <label className="label">Proprietar:</label>
+            <input type="text" name="owner" value={editData.owner} onChange={handleEditChange} className="input" />
 
-          <button onClick={handleSaveDetails} className="primary-btn mt-2">Salvează detaliile</button>
-        </div>
-      )}
+            <button onClick={handleSaveDetails} className="primary-btn mt-2">Salvează detaliile</button>
+          </>
+        )}
 
-      {successMessage && <div className="alert alert-success mt-4">{successMessage}</div>}
-      {error && <div className="alert alert-error mt-4"><strong>Eroare:</strong> {error}</div>}
+        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+        {error && <div className="alert alert-error"><strong>Eroare:</strong> {error}</div>}
+      </div>
     </div>
   );
 }
