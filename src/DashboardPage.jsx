@@ -1,0 +1,89 @@
+// src/DashboardPage.jsx
+import React, { useEffect, useState } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid
+} from 'recharts';
+
+function DashboardPage() {
+  const [stats, setStats] = useState(null);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch('http://localhost:8080/api/dashboard/stats', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        if (!res.ok) {
+          throw new Error('Eroare la încărcarea statisticilor');
+        }
+
+        const data = await res.json();
+
+        // 🔁 Conversie din obiect → array pentru grafice
+        const countiesArray = Object.entries(data.topCountiesLast7Days || {}).map(
+          ([county, count]) => ({ county, count })
+        );
+
+        // ✅ Salvăm în format compatibil cu UI-ul
+        setStats({
+          totalPlates: data.totalPlates,
+          totalInsurances: data.totalInsurances,
+          totalParkings: data.totalParkings,
+          topCounties: countiesArray
+        });
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  return (
+    <div className="card">
+      <h2 className="text-xl font-semibold mb-4 text-gray-700">📊 Dashboard</h2>
+
+      {error && <div className="alert alert-error">{error}</div>}
+
+      {stats && (
+        <>
+          <div className="mb-6">
+            <p className="text-lg font-medium">
+              Număr total de plăcuțe: <strong>{stats.totalPlates}</strong>
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-md font-semibold mb-2">
+              🗺️ Top județe (ultimele 7 zile):
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={stats.topCounties}
+                margin={{ top: 10, right: 30, left: 0, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="county" />
+                <YAxis allowDecimals={false} />
+                <Tooltip />
+                <Bar dataKey="count" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default DashboardPage;

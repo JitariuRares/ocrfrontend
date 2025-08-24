@@ -128,7 +128,14 @@ function PlateSearchPage() {
                   <td>{item.brand ?? '-'}</td>
                   <td>{item.model ?? '-'}</td>
                   <td>{item.owner ?? '-'}</td>
-                  <td>{item.imagePath ?? '-'}</td>
+                  <td>
+                    {item.imagePath ? (
+                      <span title={item.imagePath}>🖼️</span>
+                    ) : (
+                      '-'
+                    )}
+                  </td>
+
                   <td>
                     {item.processedAt
                       ? new Date(item.processedAt).toLocaleString()

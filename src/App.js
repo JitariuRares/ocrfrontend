@@ -10,6 +10,9 @@ import InsuranceSearchPage from './InsuranceSearchPage';
 import AddParkingPage from './AddParkingPage';
 import ParkingSearchPage from './ParkingSearchPage';
 import Navbar from './Navbar'; 
+import AddPlateWithoutImagePage from './AddPlateWithoutImagePage';
+import DashboardPage from './DashboardPage';
+
 
 import './App.css';
 import './index.css';
@@ -29,11 +32,16 @@ function App() {
             <Route path="/search-insurance" element={<ProtectedRoute><InsuranceSearchPage /></ProtectedRoute>} />
             <Route path="/add-parking" element={<ProtectedRoute><AddParkingPage /></ProtectedRoute>} />
             <Route path="/search-parking" element={<ProtectedRoute><ParkingSearchPage /></ProtectedRoute>} />
+            <Route
+              path="/add-plate-manual"
+              element={<ProtectedRoute><AddPlateWithoutImagePage /></ProtectedRoute>}
+            />
+            <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
           </Routes>
         </main>
         <footer className="bg-white py-4">
           <div className="max-w-3xl mx-auto text-center text-gray-500 text-sm">
-            © 2025 ALPR App – versiune 1.0.0
+            © 2025 ALPR App - versiune 1.0.0
           </div>
         </footer>
       </div>

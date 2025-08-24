@@ -28,6 +28,10 @@ function Navbar() {
                 <NavLink to="/search" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                   Caută plăcuță
                 </NavLink>
+                <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                  Dashboard
+                </NavLink>
+
                 {(role === 'INSURANCE' || role === 'POLICE') && (
                   <NavLink to="/search-insurance" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                     Caută asigurare
@@ -38,6 +42,12 @@ function Navbar() {
                     Adaugă asigurare
                   </NavLink>
                 )}
+                {role === 'POLICE' && (
+                  <NavLink to="/add-plate-manual" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                    Adaugă plăcuță manual
+                  </NavLink>
+                )}
+
                 {role === 'PARKING' && (
                   <NavLink to="/add-parking" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                     Adaugă parcare

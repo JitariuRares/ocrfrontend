@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './LoginPage.css';
 
 function LoginPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('POLICE'); // default role
+  const [role, setRole] = useState('POLICE');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // ✅ Detectăm redirect cu parametru ?expired=true
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('expired') === 'true') {
+      setError('Sesiunea a expirat. Te rugăm să te autentifici din nou.');
+    }
+  }, [location]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -120,7 +129,14 @@ function LoginPage() {
           <button
             type="button"
             onClick={() => setIsRegistering(!isRegistering)}
-            style={{ marginLeft: '0.5rem', textDecoration: 'underline', background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}
+            style={{
+              marginLeft: '0.5rem',
+              textDecoration: 'underline',
+              background: 'none',
+              border: 'none',
+              color: '#fff',
+              cursor: 'pointer',
+            }}
           >
             {isRegistering ? 'Autentifică-te' : 'Creează unul'}
           </button>
