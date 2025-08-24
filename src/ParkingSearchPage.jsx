@@ -23,27 +23,27 @@ function ParkingSearchPage() {
         const data = await response.json();
         setResults(data);
       } else {
-        setError('Nu s-a găsit niciun istoric pentru această plăcuță.');
+        setError('Nu s-a gasit niciun istoric pentru aceasta placuta.');
       }
     } catch (err) {
-      setError('Eroare de rețea.');
+      setError('Eroare de retea.');
     }
   };
 
   return (
     <>
       <div className="search-form">
-        <h2>🅿️ Caută Istoric de Parcare</h2>
+        <h2>🅿️ Cauta Istoric de Parcare</h2>
         <form onSubmit={handleSearch}>
           <input
             type="text"
             value={plateNumber}
             onChange={(e) => setPlateNumber(e.target.value)}
-            placeholder="Număr plăcuță"
+            placeholder="Numar placuta"
             className="search-input"
             required
           />
-          <button type="submit" className="search-btn">Caută</button>
+          <button type="submit" className="search-btn">Cauta</button>
         </form>
       </div>
 
@@ -56,7 +56,7 @@ function ParkingSearchPage() {
               <tr>
                 <th>ID</th>
                 <th>Intrare</th>
-                <th>Ieşire</th>
+                <th>Iesire</th>
               </tr>
             </thead>
             <tbody>

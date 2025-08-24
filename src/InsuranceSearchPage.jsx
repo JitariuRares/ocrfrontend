@@ -10,7 +10,7 @@ function InsuranceSearchPage() {
     setInsuranceList([]);
 
     if (!plateNumber) {
-      setError('Introdu un număr de înmatriculare');
+      setError('Introdu un numar de inmatriculare');
       return;
     }
 
@@ -22,7 +22,7 @@ function InsuranceSearchPage() {
       });
 
       if (!res.ok) {
-        throw new Error('Eroare la căutare');
+        throw new Error('Eroare la cautare');
       }
 
       const data = await res.json();
@@ -36,7 +36,7 @@ function InsuranceSearchPage() {
   return (
     <>
       <div className="search-form">
-        <h2>📄 Caută Asigurare după Număr Plăcuță</h2>
+        <h2>📄 Cauta Asigurare dupa Numar Placuta</h2>
 
         <input
           type="text"
@@ -46,7 +46,7 @@ function InsuranceSearchPage() {
           placeholder="Ex: SV15WDC"
         />
 
-        <button onClick={handleSearch} className="search-btn">Caută</button>
+        <button onClick={handleSearch} className="search-btn">Cauta</button>
       </div>
 
       {error && <div className="alert alert-error mb-4">{error}</div>}
@@ -56,10 +56,10 @@ function InsuranceSearchPage() {
           <h3 className="font-semibold mb-2">Rezultate:</h3>
           {insuranceList.map((ins, idx) => (
             <div key={idx} className="mb-4">
-              <p><strong>ID poliță:</strong> {ins.id}</p>
+              <p><strong>ID polita:</strong> {ins.id}</p>
               <p><strong>Companie:</strong> {ins.company}</p>
               <p><strong>De la:</strong> {ins.validFrom}</p>
-              <p><strong>Până la:</strong> {ins.validTo}</p>
+              <p><strong>Pana la:</strong> {ins.validTo}</p>
               <hr className="my-2" />
             </div>
           ))}

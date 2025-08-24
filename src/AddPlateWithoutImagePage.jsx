@@ -20,7 +20,7 @@ function AddPlateWithoutImagePage() {
     setError('');
 
     if (!form.plateNumber) {
-      setError('Numărul plăcuței este obligatoriu.');
+      setError('Numarul placutei este obligatoriu.');
       return;
     }
 
@@ -33,7 +33,7 @@ function AddPlateWithoutImagePage() {
       const existing = await checkRes.json();
 
       if (Array.isArray(existing) && existing.length > 0) {
-        setError('O plăcuță cu acest număr există deja în sistem.');
+        setError('O placuta cu acest numar exista deja in sistem.');
         return;
       }
 
@@ -51,7 +51,7 @@ function AddPlateWithoutImagePage() {
         throw new Error(msg || 'Eroare la salvare');
       }
 
-      setMessage('✅ Plăcuța a fost adăugată cu succes!');
+      setMessage('✅ Placuta a fost adaugata cu succes!');
       setForm({ plateNumber: '', brand: '', model: '', owner: '' });
     } catch (err) {
       setError(err.message);
@@ -60,9 +60,9 @@ function AddPlateWithoutImagePage() {
 
   return (
     <div className="card max-w-xl mx-auto">
-      <h2 className="text-xl font-semibold mb-4">🆕 Adaugă Plăcuță fără Poză</h2>
+      <h2 className="text-xl font-semibold mb-4">🆕 Adauga Placuta fara Poza</h2>
       <form onSubmit={handleSubmit}>
-        <label className="block font-medium mb-1">Număr plăcuță:</label>
+        <label className="block font-medium mb-1">Numar placuta:</label>
         <input
           name="plateNumber"
           value={form.plateNumber}
@@ -95,7 +95,7 @@ function AddPlateWithoutImagePage() {
           className="input input-bordered w-full mb-4"
         />
 
-        <button type="submit" className="primary-btn w-full">Salvează plăcuța</button>
+        <button type="submit" className="primary-btn w-full">Salveaza placuta</button>
       </form>
 
       {error && <div className="alert alert-error mt-4">{error}</div>}

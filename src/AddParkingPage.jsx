@@ -37,23 +37,23 @@ function AddParkingPage() {
         setEntryTime('');
         setExitTime('');
       } else {
-        setError('A apărut o eroare la salvarea parcării.');
+        setError('A aparut o eroare la salvarea parcarii.');
       }
     } catch (err) {
-      setError('Eroare de rețea.');
+      setError('Eroare de retea.');
     }
   };
 
   return (
     <>
       <div className="search-form">
-        <h2>🅿️ Adaugă Istoric de Parcare</h2>
+        <h2>🅿️ Adauga Istoric de Parcare</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             value={plateNumber}
             onChange={(e) => setPlateNumber(e.target.value)}
-            placeholder="Număr plăcuță"
+            placeholder="Numar placuta"
             className="search-input"
             required
           />
@@ -70,13 +70,13 @@ function AddParkingPage() {
             onChange={(e) => setExitTime(e.target.value)}
             className="search-input"
           />
-          <button type="submit" className="search-btn">Salvează</button>
+          <button type="submit" className="search-btn">Salveaza</button>
         </form>
       </div>
 
       {successData && (
         <div className="alert alert-success">
-          Parcarea a fost salvată cu ID: {successData.id}
+          Parcarea a fost salvata cu ID: {successData.id}
         </div>
       )}
 

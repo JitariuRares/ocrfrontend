@@ -11,7 +11,7 @@ function PlateSearchPage() {
   const handleSearch = async () => {
     const q = (query || '').trim();
     if (!q) {
-      setError('Introdu o plăcuță validă (ex: SV15WDC)');
+      setError('Introdu o placuta valida (ex: SV15WDC)');
       setResults([]);
       return;
     }
@@ -32,7 +32,7 @@ function PlateSearchPage() {
 
       if (!response.ok) {
         const text = await response.text().catch(() => '');
-        throw new Error(text || `Eroare la căutare (status ${response.status})`);
+        throw new Error(text || `Eroare la cautare (status ${response.status})`);
       }
 
       const data = await response.json();
@@ -43,7 +43,7 @@ function PlateSearchPage() {
       }
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Eroare neașteptată');
+      setError(err.message || 'Eroare neasteptata');
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,7 @@ function PlateSearchPage() {
       );
 
       if (!response.ok) {
-        throw new Error('Eroare la descărcarea PDF-ului');
+        throw new Error('Eroare la descarcarea PDF-ului');
       }
 
       const blob = await response.blob();
@@ -76,7 +76,7 @@ function PlateSearchPage() {
       window.URL.revokeObjectURL(url);
     } catch (err) {
       console.error('Eroare PDF:', err.message);
-      alert('Nu s-a putut descărca PDF-ul');
+      alert('Nu s-a putut descarca PDF-ul');
     }
   };
 
@@ -89,7 +89,7 @@ function PlateSearchPage() {
   return (
     <>
       <div className="search-form">
-        <h2>🔍 Căutare după plăcuță</h2>
+        <h2>🔍 Cautare dupa placuta</h2>
         <input
           type="text"
           placeholder="Ex: SV15WDC sau fragment: SV"
@@ -99,7 +99,7 @@ function PlateSearchPage() {
           className="search-input"
         />
         <button onClick={handleSearch} disabled={loading} className="search-btn">
-          {loading ? 'Se caută…' : 'Caută'}
+          {loading ? 'Se cauta…' : 'Cauta'}
         </button>
       </div>
 
@@ -111,12 +111,12 @@ function PlateSearchPage() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Plăcuță</th>
+                <th>Placuta</th>
                 <th>Marca</th>
                 <th>Model</th>
                 <th>Proprietar</th>
                 <th>Imagine</th>
-                <th>Data procesării</th>
+                <th>Data procesarii</th>
                 {role === 'POLICE' && <th>PDF</th>}
               </tr>
             </thead>
@@ -160,7 +160,7 @@ function PlateSearchPage() {
       )}
 
       {!loading && !error && results.length === 0 && query.trim() !== '' && (
-        <div className="text-gray-600">Nu s-au găsit rezultate.</div>
+        <div className="text-gray-600">Nu s-au gasit rezultate.</div>
       )}
     </>
   );

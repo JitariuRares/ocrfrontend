@@ -1,6 +1,4 @@
-/* src/App.css */
 
-/* ====== HEADER / NAVBAR ====== */
 .navbar {
   position: fixed;
   top: 0;
@@ -76,11 +74,10 @@
 .main-container {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 11rem 1rem 2rem; /* ↑ creștem padding-top */
+  padding: 11rem 1rem 2rem; 
 }
 
 
-/* ====== CARD STANDARD ====== */
 .card {
   background-color: rgba(255,255,255,0.95);
   padding: 1.5rem;
@@ -89,7 +86,6 @@
   margin-bottom: 2rem;
 }
 
-/* ====== BUTOANE ====== */
 .primary-btn {
   background-color: #3b82f6;
   color: white;
@@ -106,14 +102,12 @@
   background-color: #2563eb;
 }
 
-/* ====== INPUT DE TIP FILE ====== */
 .file-input {
   display: block;
   margin-bottom: 1rem;
   font-size: 0.95rem;
 }
 
-/* ====== MESAJE DE STATUS ====== */
 .alert {
   margin-top: 1rem;
   padding: 1rem;
@@ -133,7 +127,6 @@
   color: #991b1b;
 }
 
-/* ====== TABEL ====== */
 .table-container {
   overflow-x: auto;
 }
@@ -165,7 +158,6 @@
   background-color: #e5e7eb;
 }
 
-/* ====== PAGINATION ====== */
 .pagination {
   display: flex;
   justify-content: center;
@@ -194,7 +186,6 @@
   cursor: not-allowed;
 }
 
-/* ====== USER INFO TEXT ====== */
 .user-info,
 .nav-user {
   margin-top: 0.4rem;
@@ -243,13 +234,12 @@
   background-color: #2563eb;
 }
 
-/* ====== TABEL – ÎMBUNĂTĂȚIT ====== */
 .table th,
 .table td {
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid #e5e7eb;
-  background-color: white; /* Fundal alb clar */
+  background-color: white; 
 }
 
 .table th {
@@ -259,14 +249,13 @@
 }
 
 .table tr:nth-child(odd) {
-  background-color: #f9fafb; /* Gri foarte deschis */
+  background-color: #f9fafb; 
 }
 
 .table tr:hover {
   background-color: #e5e7eb;
 }
 
-/* ====== BUTON PDF ====== */
 .download-btn {
   background-color: #3b82f6;
   color: white;

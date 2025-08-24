@@ -11,11 +11,10 @@ function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ Detectăm redirect cu parametru ?expired=true
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('expired') === 'true') {
-      setError('Sesiunea a expirat. Te rugăm să te autentifici din nou.');
+      setError('Sesiunea a expirat. Te rugam sa te autentifici din nou.');
     }
   }, [location]);
 
@@ -36,7 +35,7 @@ function LoginPage() {
       localStorage.setItem('role', decoded.role);
       navigate('/upload');
     } else {
-      setError('Autentificare eșuată');
+      setError('Autentificare esuata');
     }
   };
 
@@ -50,14 +49,14 @@ function LoginPage() {
     });
 
     if (response.ok) {
-      alert('Cont creat cu succes! Te poți loga acum.');
+      alert('Cont creat cu succes! Te poti loga acum.');
       setIsRegistering(false);
       setUsername('');
       setPassword('');
       setRole('POLICE');
     } else {
       const msg = await response.text();
-      setError(msg || 'Înregistrare eșuată');
+      setError(msg || 'Inregistrare esuata');
     }
   };
 
@@ -66,11 +65,11 @@ function LoginPage() {
       <div className="login-card">
         <div className="login-header">
           <div className="icon">🔐</div>
-          <h2>{isRegistering ? 'Înregistrare cont nou' : 'Autentificare'}</h2>
+          <h2>{isRegistering ? 'Inregistrare cont nou' : 'Autentificare'}</h2>
           <p className="subtitle">
             {isRegistering
-              ? 'Completează pentru a-ți crea un cont nou'
-              : 'Introdu datele contului tău pentru a continua'}
+              ? 'Completeaza pentru a-ti crea un cont nou'
+              : 'Introdu datele contului tau pentru a continua'}
           </p>
         </div>
 
@@ -90,7 +89,7 @@ function LoginPage() {
             <span className="input-icon">🔒</span>
             <input
               type="password"
-              placeholder="Parolă"
+              placeholder="Parola"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -106,9 +105,9 @@ function LoginPage() {
                 className="input"
                 style={{ paddingLeft: '2.5rem' }}
               >
-                <option value="POLICE">Poliție</option>
-                <option value="INSURANCE">Asigurări</option>
-                <option value="PARKING">Parcări</option>
+                <option value="POLICE">Politie</option>
+                <option value="INSURANCE">Asigurator</option>
+                <option value="PARKING">Operator Parcari</option>
               </select>
             </div>
           )}
@@ -138,7 +137,7 @@ function LoginPage() {
               cursor: 'pointer',
             }}
           >
-            {isRegistering ? 'Autentifică-te' : 'Creează unul'}
+            {isRegistering ? 'Autentifica-te' : 'Creeaza unul'}
           </button>
         </p>
       </div>

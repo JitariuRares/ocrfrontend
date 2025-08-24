@@ -95,7 +95,7 @@ function UploadPage() {
 
   const handleSaveDetails = async () => {
     if (!carData || !carData.id) {
-      setError('Nu există o plăcuță validă pentru actualizare.');
+      setError('Nu exista o placuta valida pentru actualizare.');
       return;
     }
 
@@ -139,7 +139,7 @@ function UploadPage() {
               onZoomChange={setZoom}
               onCropComplete={onCropComplete}
             />
-            <p className="text-sm text-center text-gray-600 mt-2">Apasă ENTER pentru a confirma selecția</p>
+            <p className="text-sm text-center text-gray-600 mt-2">Apasa ENTER pentru a confirma selectia</p>
           </div>
         )}
 
@@ -158,11 +158,11 @@ function UploadPage() {
       </div>
 
       <div className="upload-right">
-        <h2 className="upload-title">📋 Detalii Plăcuță</h2>
+        <h2 className="upload-title">📋 Detalii Plăcuta</h2>
 
         {carData && (
           <>
-            <p><strong>Plăcuță:</strong> {carData.plateNumber}</p>
+            <p><strong>Placuta:</strong> {carData.plateNumber}</p>
 
             <label className="label">Marca:</label>
             <input type="text" name="brand" value={editData.brand} onChange={handleEditChange} className="input" />
@@ -173,7 +173,7 @@ function UploadPage() {
             <label className="label">Proprietar:</label>
             <input type="text" name="owner" value={editData.owner} onChange={handleEditChange} className="input" />
 
-            <button onClick={handleSaveDetails} className="primary-btn mt-2">Salvează detaliile</button>
+            <button onClick={handleSaveDetails} className="primary-btn mt-2">Salveaza detaliile</button>
           </>
         )}
 

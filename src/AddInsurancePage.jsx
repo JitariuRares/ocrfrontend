@@ -15,7 +15,7 @@ function AddInsurancePage() {
     setSavedInsurance(null);
 
     if (!plateNumber || !company || !validFrom || !validTo) {
-      setError('Completează toate câmpurile');
+      setError('Completeaza toate campurile');
       return;
     }
 
@@ -28,7 +28,7 @@ function AddInsurancePage() {
 
       const plates = await plateRes.json();
       if (!Array.isArray(plates) || plates.length === 0) {
-        throw new Error('Plăcuța nu există în baza de date');
+        throw new Error('Placuta nu exista in baza de date');
       }
 
       const plate = plates[0];
@@ -50,7 +50,7 @@ function AddInsurancePage() {
 
       if (!insuranceRes.ok) {
         const msg = await insuranceRes.text();
-        throw new Error(msg || 'Eroare la salvarea asigurării');
+        throw new Error(msg || 'Eroare la salvarea asigurarii');
       }
 
       const responseText = await insuranceRes.text();
@@ -74,10 +74,10 @@ function AddInsurancePage() {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Adaugă Poliță de Asigurare</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-700">Adauga Polita de Asigurare</h2>
 
       <div className="mb-4">
-        <label className="block font-medium mb-1">Număr plăcuță existent:</label>
+        <label className="block font-medium mb-1">Numar placuta existent:</label>
         <input
           type="text"
           value={plateNumber}
@@ -88,7 +88,7 @@ function AddInsurancePage() {
       </div>
 
       <div className="mb-4">
-        <label className="block font-medium mb-1">Companie de asigurări:</label>
+        <label className="block font-medium mb-1">Companie de asigurari:</label>
         <input
           type="text"
           value={company}
@@ -108,7 +108,7 @@ function AddInsurancePage() {
       </div>
 
       <div className="mb-4">
-        <label className="block font-medium mb-1">Valabil până la:</label>
+        <label className="block font-medium mb-1">Valabil pana la:</label>
         <input
           type="date"
           value={validTo}
@@ -117,17 +117,17 @@ function AddInsurancePage() {
         />
       </div>
 
-      <button onClick={handleSubmit} className="primary-btn">Salvează polița</button>
+      <button onClick={handleSubmit} className="primary-btn">Salveaza polita</button>
 
       {message && <div className="alert alert-success mt-4">{message}</div>}
       {error && <div className="alert alert-error mt-4">{error}</div>}
 
       {savedInsurance && (
         <div className="alert alert-success mt-4">
-          <p><strong>ID poliță:</strong> {savedInsurance.id}</p>
+          <p><strong>ID polita:</strong> {savedInsurance.id}</p>
           <p><strong>Companie:</strong> {savedInsurance.company}</p>
           <p><strong>De la:</strong> {savedInsurance.validFrom}</p>
-          <p><strong>Până la:</strong> {savedInsurance.validTo}</p>
+          <p><strong>Pana la:</strong> {savedInsurance.validTo}</p>
         </div>
       )}
     </div>

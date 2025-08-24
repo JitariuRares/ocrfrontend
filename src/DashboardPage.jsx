@@ -24,17 +24,15 @@ function DashboardPage() {
         });
 
         if (!res.ok) {
-          throw new Error('Eroare la încărcarea statisticilor');
+          throw new Error('Eroare la incarcarea statisticilor');
         }
 
         const data = await res.json();
 
-        // 🔁 Conversie din obiect → array pentru grafice
         const countiesArray = Object.entries(data.topCountiesLast7Days || {}).map(
           ([county, count]) => ({ county, count })
         );
 
-        // ✅ Salvăm în format compatibil cu UI-ul
         setStats({
           totalPlates: data.totalPlates,
           totalInsurances: data.totalInsurances,
@@ -59,13 +57,13 @@ function DashboardPage() {
         <>
           <div className="mb-6">
             <p className="text-lg font-medium">
-              Număr total de plăcuțe: <strong>{stats.totalPlates}</strong>
+              Numar total de placute: <strong>{stats.totalPlates}</strong>
             </p>
           </div>
 
           <div>
             <h3 className="text-md font-semibold mb-2">
-              🗺️ Top județe (ultimele 7 zile):
+              🗺️ Top judete (ultimele 7 zile):
             </h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart

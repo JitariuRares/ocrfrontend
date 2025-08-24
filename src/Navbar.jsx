@@ -1,4 +1,3 @@
-// src/Navbar.jsx
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './App.css';
@@ -18,7 +17,7 @@ function Navbar() {
     <div className="navbar">
       <div className="nav-container">
         <div className="nav-card">
-          <h1 className="nav-header">ALPR Dashboard</h1>
+          <h1 className="nav-header">Serviciu National ALPR</h1>
           {isLoggedIn && (
             <>
               <nav className="nav-links">
@@ -34,37 +33,38 @@ function Navbar() {
 
                 {(role === 'INSURANCE' || role === 'POLICE') && (
                   <NavLink to="/search-insurance" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                    Caută asigurare
+                    Cauta asigurare
                   </NavLink>
                 )}
                 {role === 'INSURANCE' && (
                   <NavLink to="/add-insurance" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                    Adaugă asigurare
+                    Adauga asigurare
                   </NavLink>
                 )}
                 {role === 'POLICE' && (
                   <NavLink to="/add-plate-manual" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                    Adaugă plăcuță manual
+                    Adauga placuta manual
                   </NavLink>
                 )}
 
                 {role === 'PARKING' && (
                   <NavLink to="/add-parking" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                    Adaugă parcare
+                    Adauga parcare
                   </NavLink>
                 )}
                 {(role === 'PARKING' || role === 'POLICE') && (
                   <NavLink to="/search-parking" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                    Caută parcare
+                    Cauta parcare
                   </NavLink>
                 )}
                 <button onClick={handleLogout} className="nav-link">
                   Logout
                 </button>
+
               </nav>
 
               <div className="nav-user">
-                Logat ca: <strong>{username}</strong> ({role})
+                Logat ca: <strong>{username}</strong>
               </div>
             </>
           )}

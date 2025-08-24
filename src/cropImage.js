@@ -1,4 +1,3 @@
-// src/cropImage.js
 export default function getCroppedImg(imageSrc, pixelCrop) {
   return new Promise((resolve, reject) => {
     const image = new Image();
@@ -25,7 +24,7 @@ export default function getCroppedImg(imageSrc, pixelCrop) {
 
       canvas.toBlob((blob) => {
         if (!blob) {
-          reject(new Error('Crop failed'));
+          reject(new Error('Crop esuat!'));
           return;
         }
         resolve(blob);
